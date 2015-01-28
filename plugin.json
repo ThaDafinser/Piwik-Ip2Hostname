@@ -10,7 +10,7 @@
 	],
 	"theme": false,
 	"require": {
-		"piwik": "2.6.0",
+		"piwik": "2.10.0",
 		"php": "5.4.0"
 	}
 }
