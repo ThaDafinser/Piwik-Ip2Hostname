@@ -4,7 +4,7 @@ namespace Piwik\Plugins\Ip2Hostname;
 use Piwik\Plugin;
 use Piwik\Common;
 use Piwik\Db;
-use Piwik\IP;
+use Piwik\Network;
 
 class Ip2Hostname extends Plugin
 {
@@ -21,9 +21,7 @@ class Ip2Hostname extends Plugin
         return;
         
         $query = "
-            ALTER IGNORE 
-            TABLE `" . Common::prefixTable('log_visit') . "` 
-                ADD `location_hostname` VARCHAR(255) NULL
+            ALTER IGNORE TABLE `" . Common::prefixTable('log_visit') . "` " . "ADD `location_hostname` VARCHAR(255) NULL
         ";
         Db::exec($query);
     }
@@ -31,9 +29,7 @@ class Ip2Hostname extends Plugin
     public function uninstall()
     {
         $query = "
-            ALTER 
-            TABLE `" . Common::prefixTable('log_visit') . "` 
-                DROP `location_hostname`
+            ALTER TABLE `" . Common::prefixTable('log_visit') . "` DROP `location_hostname`
         ";
         Db::exec($query);
     }
@@ -44,8 +40,7 @@ class Ip2Hostname extends Plugin
      */
     public function logIp2Hostname(array &$visitorInfo)
     {
-        $ip = $visitorInfo['location_ip'];
-        $ip = IP::N2P($ip);
+        $ip = Network\IPUtils::binaryToStringIP($visitorInfo['location_ip']);
         
         $hostname = gethostbyaddr($ip);
         if ($hostname !== false && $hostname !== $ip) {
