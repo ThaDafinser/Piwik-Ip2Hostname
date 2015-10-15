@@ -63,7 +63,7 @@ class Ip2Hostname extends VisitDimension
             return null;
         }
         
-        $ip = IP::fromStringIP($ipStr);
+        $ip = IP::fromStringIP($ip);
         
         return $ip->getHostname();
     }
