@@ -9,6 +9,7 @@
 namespace Piwik\Plugins\Ip2Hostname\Columns;
 
 use Piwik\Common;
+use Piwik\Network\IP;
 use Piwik\Network\IPUtils;
 use Piwik\Piwik;
 use Piwik\Plugin\Dimension\VisitDimension;
