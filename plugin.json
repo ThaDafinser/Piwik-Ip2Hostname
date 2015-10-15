@@ -1,13 +1,13 @@
 {
     "name": "Ip2Hostname",
     "description": "Piwik plugin to get the hostname from the visitor IP",
-    "version": "1.0.3",
+    "version": "v2.0.0",
     "keywords": ["ip2hostname", "plugin"],
     "license": "GPL v3",
     "homepage": "https://github.com/ThaDafinser/Piwik-Ip2Hostname",
     "authors": [
-		{"name": "Martin Keckeis", "homepage": "https://github.com/thadafinser"}
-	],
+        {"name": "Martin Keckeis", "homepage": "https://github.com/thadafinser"}
+    ],
 	"theme": false,
 	"require": {
 		"piwik": "2.15.0",
