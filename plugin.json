@@ -8,9 +8,9 @@
     "authors": [
         {"name": "Martin Keckeis", "homepage": "https://github.com/thadafinser"}
     ],
-	"theme": false,
-	"require": {
-		"piwik": "2.15.0",
-		"php": "5.5.0"
-	}
+    "theme": false,
+    "require": {
+        "piwik": "2.15.0",
+        "php": "5.5.0"
+    }
 }
