@@ -23,19 +23,20 @@ class Ip2Hostname extends VisitDimension
 
     protected $columnName = 'location_hostname';
 
+    protected $columnType = 'VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL';
 
     public function getName()
     {
-        return Piwik::translate('Provider_ColumnProvider');
+        return Piwik::translate('Ip2Hostname_LocationHostname');
     }
-    
+
     public function getRequiredVisitFields()
     {
         return array(
             'location_ip'
         );
     }
-    
+
     /**
      *
      * @param Request $request            
@@ -57,40 +58,12 @@ class Ip2Hostname extends VisitDimension
         // In case the IP was anonymized, we should not continue since the DNS reverse lookup will fail and this will slow down tracking
         if (substr($ip, - 2, 2) == '.0') {
             Common::printDebug("IP Was anonymized so we skip the DNS reverse lookup...");
-            return false;
+            
+            return null;
         }
         
-        $hostname = $this->getHost($ip);
-        $hostnameExtension = ProviderPlugin::getCleanHostname($hostname);
+        $ip = IP::fromStringIP($ipStr);
         
-        // add the provider value in the table log_visit
-        $locationProvider = substr($hostnameExtension, 0, 100);
-        
-        return $locationProvider;
+        return $ip->getHostname();
     }
-
-
-    protected function configureSegments()
-    {
-        $segment = new Segment();
-        $segment->setSegment('provider');
-        $segment->setCategory('Visit Location');
-        $segment->setName('Provider_ColumnProvider');
-        $segment->setAcceptedValues('comcast.net, proxad.net, etc.');
-        $this->addSegment($segment);
-    }
-    
-
-    /**
-     * Returns the hostname given the IP address string
-     *
-     * @param string $ip
-     *            IP Address
-     * @return string hostname (or human-readable IP address)
-     */
-    private function getHost($ip)
-    {
-        return trim(strtolower(@IP::getHostByAddr($ip)));
-    }
-
 }
