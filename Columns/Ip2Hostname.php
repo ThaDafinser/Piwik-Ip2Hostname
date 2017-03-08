@@ -13,11 +13,9 @@ use Piwik\Network\IP;
 use Piwik\Network\IPUtils;
 use Piwik\Piwik;
 use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Plugin\Segment;
 use Piwik\Tracker\Request;
 use Piwik\Tracker\Visitor;
 use Piwik\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
-use Piwik\Plugins\Provider\Provider as ProviderPlugin;
 
 class Ip2Hostname extends VisitDimension
 {
